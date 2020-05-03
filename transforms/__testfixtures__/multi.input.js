@@ -1,12 +1,8 @@
 const _ = require("lodash");
 
 module.exports = function (foo, bar) {
-  const severity = _.get(
-    foo.stylelint,
-    ["ruleSeverities", bar],
-    "ignore"
-  );
-  const otherThing = [_.isString, _.isRegExp];
+  const severity = _.get(blah, "blah");
+  const otherThing = [_.isString("a"), _.isRegExp("b")];
 
   return { severity, otherThing };
 };

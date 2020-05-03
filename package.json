@@ -1,21 +1,16 @@
 {
-  "name": "lodash-require-module-codeshift",
+  "name": "codemod-lodash-requires",
   "version": "0.0.1",
-  "description": "",
+  "description": "Codemod lodash requires from \"full import\" to \"single method\" style in CommonJS modules",
   "main": "",
   "scripts": {
     "test": "jest",
-    "lint:types": "tsc --noEmit",
     "format": "npm run prettier \"transforms/**\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/jest": "^25.2.1",
-    "@types/jscodeshift": "^0.7.0",
     "jest": "^25.5.4",
-    "jscodeshift": "^0.7.0",
-    "ts-jest": "^25.4.0",
-    "typescript": "^3.8.3"
+    "jscodeshift": "^0.7.0"
   }
 }
