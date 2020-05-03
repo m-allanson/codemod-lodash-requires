@@ -1,7 +1,3 @@
-// Modify lodash requires from "full import" to "single method" style in CommonJS modules.
-// Fixes eslint errors for eslint-plugin-lodash/import-scope using config [2, "method"].
-//
-// See https://github.com/wix/eslint-plugin-lodash/blob/master/docs/rules/import-scope.md
 const transform = (file, api) => {
   const j = api.jscodeshift;
   const ast = j(file.source);
@@ -17,8 +13,8 @@ const transform = (file, api) => {
   // skip if there's no lodash require
   if (lodashRequireDeclarations.length === 0) return file.source;
 
-  // Replace: _.<method>()
-  // with:      <method>()
+  // Replace: _.<method>
+  // with:      <method>
   ast
     .find(j.MemberExpression, UNDERSCORE_EXPRESSION)
     .replaceWith(function (path) {
