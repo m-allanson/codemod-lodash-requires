@@ -20,12 +20,11 @@ const transform = (file, api) => {
   // Replace: _.<method>()
   // with:      <method>()
   ast
-    .find(j.CallExpression, UNDERSCORE_EXPRESSION)
+    .find(j.MemberExpression, UNDERSCORE_EXPRESSION)
     .replaceWith(function (path) {
-      // @ts-ignore
-      const methodName = path.node.callee.property.name;
+      const methodName = path.node.property.name;
       j.__methods[methodName] = true;
-      return j.callExpression(j.identifier(methodName), path.node.arguments);
+      return j.identifier(methodName);
     });
 
   // replace: const _ = require('lodash')
@@ -52,12 +51,9 @@ function createLodashRequire(j, methodName) {
 
 // describe _.<methodName>()
 const UNDERSCORE_EXPRESSION = {
-  type: "CallExpression",
-  callee: {
-    type: "MemberExpression",
-    object: {
-      name: "_",
-    },
+  type: "MemberExpression",
+  object: {
+    name: "_",
   },
 };
 
