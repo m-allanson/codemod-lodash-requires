@@ -4,6 +4,8 @@ A codemod to modify lodash requires from "full import" to "single method" style 
 
 Fixes eslint errors for [eslint-plugin-lodash/import-scope](https://github.com/wix/eslint-plugin-lodash/blob/master/docs/rules/import-scope.md) using config `[2, "method"]`.
 
+View the [test fixtures](./transforms/__testfixtures__) directory for example inputs and outputs.
+
 Requires [`jscodeshift`](https://github.com/facebook/jscodeshift).
 
 # Getting started

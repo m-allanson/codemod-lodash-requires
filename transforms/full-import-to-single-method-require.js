@@ -2,7 +2,7 @@ const transform = (file, api) => {
   const j = api.jscodeshift;
   const ast = j(file.source);
 
-  // Cache of underscore methods used
+  // Cache of lodash methods used
   j.__methods = {};
 
   const lodashRequireDeclarations = ast.find(
@@ -15,13 +15,11 @@ const transform = (file, api) => {
 
   // Replace: _.<method>
   // with:      <method>
-  ast
-    .find(j.MemberExpression, UNDERSCORE_EXPRESSION)
-    .replaceWith(function (path) {
-      const methodName = path.node.property.name;
-      j.__methods[methodName] = true;
-      return j.identifier(methodName);
-    });
+  ast.find(j.MemberExpression, LODASH_EXPRESSION).replaceWith(function (path) {
+    const methodName = path.node.property.name;
+    j.__methods[methodName] = true;
+    return j.identifier(methodName);
+  });
 
   // replace: const _ = require('lodash')
   // with:    const <methodName> = require('lodash/<methodName>')
@@ -46,7 +44,7 @@ function createLodashRequire(j, methodName) {
 }
 
 // describe _.<methodName>()
-const UNDERSCORE_EXPRESSION = {
+const LODASH_EXPRESSION = {
   type: "MemberExpression",
   object: {
     name: "_",
